@@ -1,0 +1,31 @@
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('//at.alicdn.com/t/font_lqw9xt5gy1hbbj4i.eot');
+  src: url('//at.alicdn.com/t/font_lqw9xt5gy1hbbj4i.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_lqw9xt5gy1hbbj4i.woff') format('woff'),
+  url('//at.alicdn.com/t/font_lqw9xt5gy1hbbj4i.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_lqw9xt5gy1hbbj4i.svg#iconfont') format('svg');
+}
+
+// Catchall baseclass
+.glyphicon {
+  position: relative;
+  display: inline-block;
+  font-family: 'Glyphicons Halflings';
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Individual icons
+.glyphicon-top                  { &:before { content: "\e6b0"; } }
+.glyphicon-turn-left            { &:before { content: "\e62c"; } }
+.glyphicon-turn-right           { &:before { content: "\e62a"; } }
+.glyphicon-address              { &:before { content: "\e68e"; } }
+.glyphicon-belt                 { &:before { content: "\e64a"; } }
+.glyphicon-mine                 { &:before { content: "\e649"; } }
+.glyphicon-home                 { &:before { content: "\e648"; } }
+.glyphicon-cart                 { &:before { content: "\e647"; } }
+.glyphicon-back                 { &:before { content: "\e605"; } }

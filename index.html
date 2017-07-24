@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>美猴王批发采购市场</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no, email=no">
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+  <script type="text/javascript">
+    let html = document.documentElement;
+    window.rem = html.getBoundingClientRect().width / 25 ;
+    if (html.getBoundingClientRect().width > 1080) {
+      window.rem = 15
+    }
+    html.style.fontSize = window.rem + 'px';
+  </script>
+</html>
