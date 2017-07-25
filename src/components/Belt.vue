@@ -5,22 +5,22 @@
       顶部
     </div>
     <header class="banner">
-      <img src="/static/belt-1.jpg" alt="">
+      <img :src="`/static/${this.TOPIC[$route.query.id]}`" alt="">
     </header>
     <nav :style='this.NAVCLASS'>
       <i class="glyphicon-turn-left glyphicon pull-left" :style='{opacity: this.navColor}'></i>
       <div class="navs pull-left">
         <ul ref='navigation'>
           <li v-for='(item, index) in NAVS' :class='index === floor && "active"' @click='changeFloor(index)'>
-            <a :href='`#${index}`'>{{item}}</a>
+            <a :href='`#${index}`'>{{item.catName}}</a>
           </li>
         </ul>
       </div>
-      <i class="glyphicon-turn-right glyphicon pull-left"></i>
+      <i class="glyphicon-turn-right glyphicon pull-left" :style='{opacity: this.navColor}'></i>
     </nav>
     <div class="belt-banner">
       <a href="#">
-        <img src="/static/banner-1.jpg" alt="">
+        <img :src="`/static/${this.BANNER[$route.query.id]}`" alt="">
       </a>
     </div>
     <div class="floor" v-for='(item, index) in NAVS' :id='index' ref='floor'>
@@ -29,16 +29,16 @@
 
         </div>
         <div class="inline-block">
-          {{item}}
+          {{item.catName}}
         </div>
         <div class="title-line inline-block">
 
         </div>
       </div>
       <div class="floor-content-one" v-if='index === 0'>
-        <div class="one-shop inline-block" v-for='item in floors'>
+        <div class="one-shop inline-block" v-for='item in NAVS[index].goodsData'>
           <a href="#">
-            <img :src='item.pic' alt="">
+            <img :src='item.pics' alt="">
             <div class="remake">
               <div class="name">
                 {{item.name}}
@@ -54,14 +54,14 @@
         </div>
       </div>
       <div v-else class="floor-content-two clearfix">
-        <div class="one-shop clearfix" v-for='item in floors'>
-          <img src='/static/load.jpg' class="lazyImg in" alt="" :data-url='item.pic'>
+        <div class="one-shop clearfix" v-for='item in NAVS[index].goodsData'>
+          <img src='/static/load.jpg' class="lazyImg in" alt="" :data-url='item.pics'>
           <div class="introduction">
-            <div>
-              {{item.intro}}
+            <div class="introduction-content">
+              {{item.content}}
             </div>
             <div class="address inline-block">
-              <i class="glyphicon-address glyphicon"></i>{{item.address}}
+              <i class="glyphicon-address glyphicon"></i>{{item.source}}
             </div>
             <div class="price inline-block pull-right">
               ￥{{item.price}}/件
@@ -109,24 +109,26 @@ export default {
       navColor: 0,
       NAVCLASS: '',
       TOPIC: [
-        'belt-1.jpg',
+        '',
+        'belt-8.jpg',
         'belt-2.jpg',
+        'belt-1.jpg',
         'belt-3.jpg',
-        'belt-4.jpg',
         'belt-5.jpg',
-        'belt-6.jpg',
+        'belt-4.jpg',
         'belt-7.jpg',
-        'belt-8.jpg'
+        'belt-6.jpg'
       ],
       BANNER: [
-        'banner-1.jpg',
+        '',
+        'banner-8.jpg',
         'banner-2.jpg',
+        'banner-1.jpg',
         'banner-3.jpg',
-        'banner-4.jpg',
         'banner-5.jpg',
-        'banner-6.jpg',
+        'banner-4.jpg',
         'banner-7.jpg',
-        'banner-8.jpg'
+        'banner-6.jpg'
       ],
       NAVS: [
         '精选布料',
@@ -160,64 +162,6 @@ export default {
           color: '#af2f2f',
           classify: '排线 / 喷漆 / 吊机 / 探头 / 法兰'
         }
-      ],
-      floors: [
-        {
-          pic: '/static/banner-1.jpg',
-          name: '40支竹节罗马',
-          price: '40',
-          address: '绍兴标杆产地',
-          intro: '双层欧式桌布 婚庆餐桌布 酒店宴会桌布 欧式圆形桌布 来样定制'
-        },
-        {
-          pic: '/static/banner-1.jpg',
-          name: '40支竹节罗马',
-          price: '40',
-          address: '绍兴标杆产地',
-          intro: '双层欧式桌布 婚庆餐桌布 酒店宴会桌布 欧式圆形桌布 来样定制'
-        },
-        {
-          pic: '/static/banner-1.jpg',
-          name: '40支竹节罗马',
-          price: '40',
-          address: '绍兴标杆产地',
-          intro: '双层欧式桌布 婚庆餐桌布 酒店宴会桌布 欧式圆形桌布 来样定制'
-        },
-        {
-          pic: '/static/banner-1.jpg',
-          name: '40支竹节罗马',
-          price: '40',
-          address: '绍兴标杆产地',
-          intro: '双层欧式桌布 婚庆餐桌布 酒店宴会桌布 欧式圆形桌布 来样定制'
-        },
-        {
-          pic: '/static/banner-1.jpg',
-          name: '40支竹节罗马',
-          price: '40',
-          address: '绍兴标杆产地',
-          intro: '双层欧式桌布 婚庆餐桌布 酒店宴会桌布 欧式圆形桌布 来样定制'
-        },
-        {
-          pic: '/static/banner-1.jpg',
-          name: '40支竹节罗马',
-          price: '40',
-          address: '绍兴标杆产地',
-          intro: '双层欧式桌布 婚庆餐桌布 酒店宴会桌布 欧式圆形桌布 来样定制'
-        },
-        {
-          pic: '/static/banner-1.jpg',
-          name: '40支竹节罗马',
-          price: '40',
-          address: '绍兴标杆产地',
-          intro: '双层欧式桌布 婚庆餐桌布 酒店宴会桌布 欧式圆形桌布 来样定制'
-        },
-        {
-          pic: '/static/banner-1.jpg',
-          name: '40支竹节罗马',
-          price: '40',
-          address: '绍兴标杆产地',
-          intro: '双层欧式桌布 婚庆餐桌布 酒店宴会桌布 欧式圆形桌布 来样定制'
-        }
       ]
     }
   },
@@ -248,9 +192,10 @@ export default {
         ctl: 'Industrial_BeltManage',
         met: 'getBeltData',
         typ: 'json',
-        beltId: 1
+        beltId: this.$route.query.id
       }).then((data) => {
         console.log(data)
+        this.NAVS = data.data
       })
     },
     goTop () {
@@ -458,6 +403,10 @@ export default {
           padding: .666667rem;
           padding-bottom: 0;
           box-sizing: border-box;
+          .introduction-content{
+            height: 1.6rem;
+            overflow: hidden;
+          }
           .address{
             font-size: .466667rem;
             color: #ff6600;

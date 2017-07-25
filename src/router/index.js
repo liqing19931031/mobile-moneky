@@ -7,6 +7,7 @@ import Index from '@/components/Index'
 // 产业带
 import Belts from '@/components/Belts'
 import Belt from '@/components/Belt'
+import Origin from '@/components/Origin'
 
 Vue.use(Router)
 
@@ -28,6 +29,10 @@ export default new Router({
     {
       path: '/belt',
       component: Belt
+    },
+    {
+      path: '/origin',
+      component: Origin
     }
   ]
 })
