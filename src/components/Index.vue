@@ -6,10 +6,10 @@
       </div>
       登录
     </div>
-    <Slide height='11rem' autoplay='true' time='1000' :imgList='this.imgList'></Slide>
+    <Slide height='11rem' :autoplay='true' :time='1000' :imgList='this.imgList'></Slide>
     <router-link to='/origin'>
       <div class="hot-address">
-          特 色 专 场
+          特 色 专 场 <i class="glyphicon-go-jump glyphicon"></i>
       </div>
     </router-link>
     <Origin></Origin>
@@ -18,14 +18,28 @@
 </template>
 
 <script>
-import Slide from './widget/nav'
-import AllNav from './widget/slide'
+import AllNav from './widget/nav'
+import Slide from './widget/slide'
 import Origin from './widget/featureOrigin'
 
 export default {
   data () {
     return {
       imgList: []
+    }
+  },
+  mounted () {
+    this.getImgList()
+  },
+  methods: {
+    getImgList () {
+      this.$ajax('get', 'ApiUrl', {
+        ctl: 'IndexExt',
+        met: 'getHomePageBanner',
+        typ: 'json'
+      }).then((data) => {
+        this.imgList = data.data
+      })
     }
   },
   components: {
@@ -66,7 +80,9 @@ export default {
     }
   }
   .hot-address{
+    box-sizing: border-box;
     background: url('/static/hot-address.jpg');
+    padding: 1.666667rem 0 0 19.666667rem;
     background-size: 100% 100%;
     height: 3rem;
     width: 100%;

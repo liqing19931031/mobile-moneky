@@ -166,11 +166,11 @@ export default {
     }
   },
   mounted () {
-    var that = this
+    let that = this
     this.getBeltData()
-    var Cheight = document.documentElement.clientHeight
-    var Cwidth = document.documentElement.clientWidth
-    var imgs = document.getElementsByClassName('lazyImg')
+    let Cheight = document.documentElement.clientHeight
+    let Cwidth = document.documentElement.clientWidth
+    let imgs = document.getElementsByClassName('lazyImg')
     this.$refs.navigation.addEventListener('scroll', function () {
       that.navColor = this.scrollLeft === 0 ? 0 : 1
     })
@@ -389,12 +389,6 @@ export default {
           border-top-left-radius: .2rem;
           border-top-right-radius: .2rem;
           transition: all 1s ease;
-          &.in{
-            opacity: 0.5;
-          }
-          &.on{
-            opacity: 1;
-          }
         }
         .introduction{
           height: 4rem;

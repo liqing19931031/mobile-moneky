@@ -17,7 +17,18 @@ let $ajax = function (method, url, data) {
   })
 }
 
+let getQuerry = function (url, variable) {
+   let vars = url.split('&')
+   let myid
+   for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split('=')
+      myid = pair[0] === variable ? pair[1] : ''
+   }
+   return myid
+}
+
 Vue.prototype.$ajax = $ajax
+Vue.prototype.getQuerry = getQuerry
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
