@@ -6,13 +6,19 @@
       </div>
       登录
     </div>
-    <Slide height='11rem' :autoplay='true' :time='1000' :imgList='this.imgList'></Slide>
+    <Slide height='12rem' :autoplay='true' :time='1000' :hasDot='true' :imgList='[this.imgList[this.imgList.length - 1], ...this.imgList, this.imgList[0]]'></Slide>
     <router-link to='/origin'>
       <div class="hot-address">
           特 色 专 场 <i class="glyphicon-go-jump glyphicon"></i>
       </div>
     </router-link>
     <Origin></Origin>
+    <div class="hot-shop">
+    </div>
+    <Slide height='28rem' :autoplay='false' specialDom='bestGoods' :imgList='[this.bestGoods[this.bestGoods.length - 1], ...this.bestGoods, this.bestGoods[0]]'></Slide>
+    <div class="hot-market">
+    </div>
+    <Slide height='27rem' :autoplay='false' specialDom='bestBusiness' :imgList='[this.bestBusiness[this.bestBusiness.length - 1], ...this.bestBusiness, this.bestBusiness[0]]'></Slide>
     <AllNav></AllNav>
   </div>
 </template>
@@ -25,11 +31,15 @@ import Origin from './widget/featureOrigin'
 export default {
   data () {
     return {
-      imgList: []
+      imgList: [],
+      bestGoods: [],
+      bestBusiness: []
     }
   },
   mounted () {
     this.getImgList()
+    this.getBestGoods()
+    this.getBestBusiness()
   },
   methods: {
     getImgList () {
@@ -39,6 +49,24 @@ export default {
         typ: 'json'
       }).then((data) => {
         this.imgList = data.data
+      })
+    },
+    getBestGoods () {
+      this.$ajax('get', 'ApiUrl', {
+        ctl: 'IndexExt',
+        met: 'getOriginBestGoods',
+        typ: 'json'
+      }).then((data) => {
+        this.bestGoods = data.data
+      })
+    },
+    getBestBusiness () {
+      this.$ajax('get', 'ApiUrl', {
+        ctl: 'IndexExt',
+        met: 'getOriginBestBusiness',
+        typ: 'json'
+      }).then((data) => {
+        this.bestBusiness = data.data
       })
     }
   },
@@ -54,11 +82,13 @@ export default {
 @import '../styles/various.less';
 
 .index{
+  padding-bottom: 3.333333rem;
   padding-top: 2.666667rem;
   .search-group{
     position: fixed;
     top: 0;
     width: 100%;
+    z-index: 999;
     height: 2.666667rem;
     background-color: @fontHover;
     box-sizing: border-box;
@@ -88,6 +118,18 @@ export default {
     width: 100%;
     font-size: .666667rem;
     color: @fontHover;
+  }
+  .hot-market{
+    background: url('/static/haoshang.jpg');
+    background-size: 100% 100%;
+    height: 3rem;
+    width: 100%;
+  }
+  .hot-shop{
+    background: url('/static/haohuo.jpg');
+    background-size: 100% 100%;
+    height: 3rem;
+    width: 100%;
   }
 }
 </style>

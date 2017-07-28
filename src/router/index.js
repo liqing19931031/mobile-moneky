@@ -3,10 +3,13 @@ import Router from 'vue-router'
 
 // 首页
 import Index from '@/components/Index'
-
-// 产业带
+// 商品详情
+import Detail from '@/components/Detail'
+// 产业带 分类
 import Belts from '@/components/Belts'
+// 产业带
 import Belt from '@/components/Belt'
+// 特色专场
 import Origin from '@/components/Origin'
 
 Vue.use(Router)
@@ -33,6 +36,10 @@ export default new Router({
     {
       path: '/origin',
       component: Origin
+    },
+    {
+      path: '/detail',
+      component: Detail
     }
   ]
 })
