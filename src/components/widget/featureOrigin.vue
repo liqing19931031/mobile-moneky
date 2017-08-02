@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="feature-group">
     <div class="feature">
-      <router-link :to="{path: '/belt', query: {id: getQuerry(item.homepage_url, 'belt_id')} }" v-for='(item, index) in this.feature' v-if='item.homepage_pic !== ""'>
+      <router-link :to="{path: '/belt', query: {id: getQuerry(item.homepage_url, 'belt_id')} }" :key='index' v-for='(item, index) in this.feature' v-if='item.homepage_pic !== ""'>
         <div class="feature-one">
           <img :src='item.homepage_pic' alt="">
         </div>
@@ -19,7 +19,7 @@ export default {
     }
   },
   mounted () {
-    this.$ajax('get', 'ApiUrl', {
+    this.$ajax('get', '', {
       ctl: 'IndexExt',
       met: 'getPopularOrigin',
       typ: 'json'

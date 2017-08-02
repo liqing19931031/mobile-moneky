@@ -8,14 +8,14 @@
       <i class="glyphicon glyphicon-belt"></i>
       产业带
     </router-link>
-    <router-link to='/belt'>
+    <a :href='`${BASEURL}cart_list.html`'>
       <i class="glyphicon glyphicon-cart"></i>
       购物车
-    </router-link>
-    <router-link to='/belt'>
+    </a>
+    <a :href='`${BASEURL}member/member.html`'>
       <i class="glyphicon glyphicon-mine"></i>
       我的
-    </router-link>
+    </a>
   </nav>
 </template>
 

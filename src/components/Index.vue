@@ -1,10 +1,12 @@
 <template lang="html">
   <div class="index">
     <div class="search-group">
-      <div class="search-input">
-        <i class="glyphicon glyphicon-search"></i> 坑爹宝的彩蛋
-      </div>
-      登录
+      <a :href='`${this.BASEURL}store_search.html`'>
+        <div class="search-input">
+          <i class="glyphicon glyphicon-search"></i> 商品或店铺名
+        </div>
+      </a>
+      <a :href='setUrl()'>登录</a>
     </div>
     <Slide height='12rem' :autoplay='true' :time='1000' :hasDot='true' :imgList='[this.imgList[this.imgList.length - 1], ...this.imgList, this.imgList[0]]'></Slide>
     <router-link to='/origin'>
@@ -40,10 +42,11 @@ export default {
     this.getImgList()
     this.getBestGoods()
     this.getBestBusiness()
+    console.log(this.getCookie('user_account'))
   },
   methods: {
     getImgList () {
-      this.$ajax('get', 'ApiUrl', {
+      this.$ajax('get', '', {
         ctl: 'IndexExt',
         met: 'getHomePageBanner',
         typ: 'json'
@@ -52,7 +55,7 @@ export default {
       })
     },
     getBestGoods () {
-      this.$ajax('get', 'ApiUrl', {
+      this.$ajax('get', '', {
         ctl: 'IndexExt',
         met: 'getOriginBestGoods',
         typ: 'json'
@@ -61,7 +64,7 @@ export default {
       })
     },
     getBestBusiness () {
-      this.$ajax('get', 'ApiUrl', {
+      this.$ajax('get', '', {
         ctl: 'IndexExt',
         met: 'getOriginBestBusiness',
         typ: 'json'
@@ -107,6 +110,9 @@ export default {
       margin-right: .666667rem;
       width: 21rem;
       border-radius: .333333rem;
+    }
+    a{
+      color: white;
     }
   }
   .hot-address{

@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="origin-group">
     <div class="topic">
-      <i class="glyphicon glyphicon-back" @click='$router.go("index")'></i>
+      <i class="glyphicon glyphicon-back" @click='$router.go(-1)'></i>
     </div>
     <div class="banner">
     </div>

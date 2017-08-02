@@ -59,3 +59,38 @@ img{
 		transition: all 1s ease;
 	}
 }
+
+// muse-ui样式覆盖
+.mu-badge-circle{
+	width: .833333rem;
+	height: .833333rem;
+	background-color: @fontHover;
+	font-size: .6rem;
+}
+
+// element-ui 样式覆盖
+.el-input-number{
+	width: 6.666667rem;
+	height: 1.333333rem;
+	.el-input__inner{
+		height: 1.333333rem;
+		padding-right: 0;
+		width: 6.666667rem;
+		font-size: .6rem;
+	}
+}
+.el-input-number__decrease,
+.el-input-number__increase{
+	width: 1.333333rem;
+	height: 1.333333rem;
+	top: .466667rem;
+	line-height: 1.333333rem;
+}
+.el-input-number__decrease{
+	right: 1.333333rem;
+}
+i{
+	&.active{
+		color: @fontHover;
+	}
+}

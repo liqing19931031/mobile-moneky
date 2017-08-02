@@ -1,13 +1,15 @@
 <template lang="html">
   <div class="best-business">
     <div class="one-line" v-for='(item, index) in this.data.data'>
-      <img :src='item.homepage_pic' alt="">
-      <div class="des">
-        {{item.homepage_desc.trim()}}
-      </div>
-      <div class="address text-center">
-        源产地：{{item.homepage_address}}
-      </div>
+      <a :href='`${BASEURL}store.html?shop_id=${item.homepage_id}`'>
+        <img :src='item.homepage_pic' alt="">
+        <div class="des">
+          {{item.homepage_desc.trim()}}
+        </div>
+        <div class="address text-center">
+          源产地：{{item.homepage_address}}
+        </div>
+      </a>
     </div>
   </div>
 </template>

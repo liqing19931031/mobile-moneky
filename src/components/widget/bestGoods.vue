@@ -1,28 +1,32 @@
 <template lang="html">
   <div class="best-goods">
     <div class="one-line" v-for='(item, index) in this.data.data' v-if='index <= 1'>
-      <img :src='item.homepage_pic' alt="">
-      <div class="des">
-        {{item.homepage_desc}}
-      </div>
-      <div class="price">
-        ￥{{item.homepage_price}}
-      </div>
-      <div class="address pull-right">
-        {{item.homepage_address}}
-      </div>
+      <router-link :to="{path: '/detail', query: {id: item.homepage_id} }">
+        <img :src='item.homepage_pic' alt="">
+        <div class="des">
+          {{item.homepage_desc}}
+        </div>
+        <div class="price">
+          ￥{{item.homepage_price}}
+        </div>
+        <div class="address pull-right">
+          {{item.homepage_address}}
+        </div>
+      </router-link>
     </div>
     <div class="two-line" v-else>
-      <img :src='item.homepage_pic' alt="">
-      <div class="des">
-        {{item.homepage_desc}}
-      </div>
-      <div class="price">
-        ￥{{item.homepage_price}}
-      </div>
-      <div class="address pull-right">
-        {{item.homepage_address}}
-      </div>
+      <router-link :to="{path: '/detail', query: {id: item.homepage_id} }">
+        <img :src='item.homepage_pic' alt="">
+        <div class="des">
+          {{item.homepage_desc}}
+        </div>
+        <div class="price">
+          ￥{{item.homepage_price}}
+        </div>
+        <div class="address pull-right">
+          {{item.homepage_address}}
+        </div>
+      </router-link>
     </div>
   </div>
 </template>
@@ -77,7 +81,8 @@ export default {
         .des{
           height: 2rem;
           overflow: hidden;
-          font-size: .8rem;
+          font-size: .6rem;
+          line-height: 1rem;
         }
         .price{
           margin-top: .333333rem;

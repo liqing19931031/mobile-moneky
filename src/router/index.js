@@ -11,6 +11,8 @@ import Belts from '@/components/Belts'
 import Belt from '@/components/Belt'
 // 特色专场
 import Origin from '@/components/Origin'
+// 评价
+import Evaluation from '@/components/Evaluation'
 
 Vue.use(Router)
 
@@ -40,6 +42,10 @@ export default new Router({
     {
       path: '/detail',
       component: Detail
+    },
+    {
+      path: '/evaluation',
+      component: Evaluation
     }
   ]
 })

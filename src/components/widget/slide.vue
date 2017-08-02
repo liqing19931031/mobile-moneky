@@ -18,12 +18,12 @@
         height: this.height,
         left: this.groupLeft + "px"
         }'>
-        <div class="slide-one" ref="slides" v-for='(item, index) in this.imgList'>
-          <a href="" v-if='item'>
-            <img :src='item.homepage_pic' alt="" v-if='specialDom === ""'>
-            <div v-else :is='specialDom' :data='item'>
-            </div>
+        <div class="slide-one" ref="slides" v-for='(item, index) in this.imgList' v-if='item'>
+          <a href="" v-if='specialDom === ""'>
+            <img :src='item.homepage_pic' alt="">
           </a>
+          <div v-else :is='specialDom' :data='item'>
+          </div>
         </div>
       </div>
       <div class="slide-dots" v-if='this.hasDot'>
@@ -108,8 +108,16 @@ export default {
         })
       }
     }, 1000)
+    // this.autoPlay()
   },
   methods: {
+    autoPlay (index) {
+      setTimeout(() => {
+        this.changeIndex(index)
+        this.index = this.index + 1
+      }, 1500)
+      this.autoPlay(index)
+    },
     handleStart (e) { // touchstart
       this.slideSecond = 0
       this.startX = e.touches[0].pageX

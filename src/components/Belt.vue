@@ -37,7 +37,7 @@
       </div>
       <div class="floor-content-one" v-if='index === 0'>
         <div class="one-shop inline-block" v-for='item in NAVS[index].goodsData'>
-          <a href="#">
+          <router-link :to="{ path: '/detail', query: {id: item.id} }">
             <img :src='item.pics' alt="">
             <div class="remake">
               <div class="name">
@@ -50,26 +50,28 @@
                 立即购买
               </div>
             </div>
-          </a>
+          </router-link>
         </div>
       </div>
       <div v-else class="floor-content-two clearfix">
         <div class="one-shop clearfix" v-for='item in NAVS[index].goodsData'>
-          <img src='/static/load.jpg' class="lazyImg in" alt="" :data-url='item.pics'>
-          <div class="introduction">
-            <div class="introduction-content">
-              {{item.content}}
+          <router-link :to="{ path: '/detail', query: {id: item.id} }">
+            <img src='/static/load.jpg' class="lazyImg in" alt="" :data-url='item.pics'>
+            <div class="introduction">
+              <div class="introduction-content">
+                {{item.content}}
+              </div>
+              <div class="address inline-block">
+                <i class="glyphicon-address glyphicon"></i>{{item.source}}
+              </div>
+              <div class="price inline-block pull-right">
+                ￥{{item.price}}/件
+              </div>
             </div>
-            <div class="address inline-block">
-              <i class="glyphicon-address glyphicon"></i>{{item.source}}
+            <div class="buy text-center">
+              立即购买
             </div>
-            <div class="price inline-block pull-right">
-              ￥{{item.price}}/件
-            </div>
-          </div>
-          <div class="buy text-center">
-            立即购买
-          </div>
+          </router-link>
         </div>
       </div>
     </div>
@@ -85,13 +87,15 @@
       </div>
       <div class="more-origin">
         <div class="more-belt" :style='{backgroundColor: item.color}' v-for='(item, index) in MOREORIGIN'>
-          <img :src='`/static/${item.pic}`' alt="">
-          <div class="belt-title text-center">
-            {{item.address}}
-          </div>
-          <div class="origin text-center">
-            {{item.classify}}
-          </div>
+          <a :href='`/belt?id=${item.id}`'>
+            <img :src='`/static/${item.pic}`' alt="">
+            <div class="belt-title text-center">
+              {{item.address}}
+            </div>
+            <div class="origin text-center">
+              {{item.classify}}
+            </div>
+          </a>
         </div>
       </div>
     </div>
@@ -112,9 +116,9 @@ export default {
         '',
         'belt-8.jpg',
         'belt-2.jpg',
-        'belt-1.jpg',
-        'belt-3.jpg',
         'belt-5.jpg',
+        'belt-3.jpg',
+        'belt-1.jpg',
         'belt-4.jpg',
         'belt-7.jpg',
         'belt-6.jpg'
@@ -123,9 +127,9 @@ export default {
         '',
         'banner-8.jpg',
         'banner-2.jpg',
-        'banner-1.jpg',
-        'banner-3.jpg',
         'banner-5.jpg',
+        'banner-3.jpg',
+        'banner-1.jpg',
         'banner-4.jpg',
         'banner-7.jpg',
         'banner-6.jpg'
@@ -141,25 +145,29 @@ export default {
         {
           pic: 'origin-1.jpg',
           address: '浙江杭州',
+          id: 8,
           color: '#32b16c',
           classify: '橱窗 / 门 / 板材 / 楼梯 / 水龙头'
         },
         {
           pic: 'origin-2.jpg',
           address: '浙江杭州',
+          id: 6,
           color: '#448aca',
-          classify: '方巾 / 女装 / 男装 / 童装 / 配饰'
-        },
-        {
-          pic: 'origin-3.jpg',
-          address: '浙江杭州',
-          color: '#f39800',
           classify: '刚床 / 机床 / 角钢 / 方管 / 线材'
         },
         {
           pic: 'origin-4.jpg',
+          address: '浙江杭州',
+          color: '#f39800',
+          id: 7,
+          classify: '方巾 / 女装 / 男装 / 童装 / 配饰'
+        },
+        {
+          pic: 'origin-3.jpg',
           address: '浙江宁波',
           color: '#af2f2f',
+          id: 3,
           classify: '排线 / 喷漆 / 吊机 / 探头 / 法兰'
         }
       ]
@@ -188,7 +196,7 @@ export default {
       this.floor = index
     },
     getBeltData () {
-      this.$ajax('get', 'ApiUrl', {
+      this.$ajax('get', '', {
         ctl: 'Industrial_BeltManage',
         met: 'getBeltData',
         typ: 'json',

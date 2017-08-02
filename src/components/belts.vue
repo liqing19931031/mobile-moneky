@@ -14,7 +14,7 @@
         </div>
       </div>
       <div class="belts-child">
-        <router-link :to="{path: 'belt', query: {id: item.belt_id}}" v-for='item in this.belts[defaultAddress].belt_data'>
+        <router-link :to="{path: 'belt', query: {id: item.belt_id}}" :key='item.sub_site_id' v-for='item in this.belts[defaultAddress].belt_data'>
           <div class="belt-child">
             {{item.belt_name}}
           </div>
@@ -41,7 +41,7 @@ export default {
       this.defaultAddress = index
     },
     getBelts () {
-      this.$ajax('get', 'ApiUrl', {
+      this.$ajax('get', '', {
         ctl: 'Industrial_BeltManage',
         met: 'getBeltList',
         typ: 'json'
