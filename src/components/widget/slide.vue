@@ -101,6 +101,7 @@ export default {
           that.handleStart(e)
         })
         item.addEventListener('touchmove', function (e) {
+          e.preventDefault()
           that.handleMove(e)
         })
         item.addEventListener('touchend', function (e) {

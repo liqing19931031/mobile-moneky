@@ -13,6 +13,8 @@ import Belt from '@/components/Belt'
 import Origin from '@/components/Origin'
 // 评价
 import Evaluation from '@/components/Evaluation'
+// 商家注册
+import Busregist from '@/components/Busregist'
 
 Vue.use(Router)
 
@@ -46,6 +48,10 @@ export default new Router({
     {
       path: '/evaluation',
       component: Evaluation
+    },
+    {
+      path: '/busregist',
+      component: Busregist
     }
   ]
 })

@@ -66,7 +66,7 @@ export default {
         '有图'
       ],
       evaList: [],
-      currentPage: 1,
+      currentPage: 0,
       getMore: '',
       type: 0,
       isloadding: false
@@ -74,10 +74,11 @@ export default {
   },
   mounted () {
     this.getEvaluation()
-    document.getElementsByClassName('evaluation')[0].addEventListener('scroll', this.handlerScroll)
+    document.addEventListener('scroll', this.handlerScroll)
   },
   methods: {
     getEvaluation (type) {
+      this.currentPage = type !== undefined ? 1 : this.currentPage + 1
       this.isloadding = true
       this.$ajax('get', '', {
         ctl: 'Goods_GoodsExt',
@@ -87,18 +88,54 @@ export default {
         sou: 'wap',
         goods_id: 299,
         curpage: this.currentPage,
-        page: 10
+        page: 4
       }).then((data) => {
         this.isloadding = false
         this.evaList = type !== undefined ? data.data.items : [...this.evaList, ...data.data.items]
         this.getMore = data.data.items.length ? '已经到底了只能帮你到这里啦~' : ''
       })
     },
+    getScrollTop () {
+      let scrollTop = 0
+      let bodyScrollTop = 0
+      let documentScrollTop = 0
+      if (document.body) {
+        bodyScrollTop = document.body.scrollTop
+      }
+      if (document.documentElement) {
+        documentScrollTop = document.documentElement.scrollTop
+      }
+      scrollTop = (bodyScrollTop - documentScrollTop > 0) ? bodyScrollTop : documentScrollTop
+      return scrollTop
+    },
+    getScrollHeight () {
+      let scrollHeight = 0
+      let bodyScrollHeight = 0
+      let documentScrollHeight = 0
+      if (document.body) {
+        bodyScrollHeight = document.body.scrollHeight
+      }
+      if (document.documentElement) {
+        documentScrollHeight = document.documentElement.scrollHeight
+      }
+      scrollHeight = (bodyScrollHeight - documentScrollHeight > 0) ? bodyScrollHeight : documentScrollHeight
+      return scrollHeight
+    },
+    getWindowHeight () {
+      var windowHeight = 0
+      if (document.compatMode === 'CSS1Compat') {
+        windowHeight = document.documentElement.clientHeight
+      } else {
+        windowHeight = document.body.clientHeight
+      }
+      return windowHeight
+    },
     handlerScroll () {
-      this.isloadding = true
+      if (this.getScrollTop() + this.getWindowHeight() === this.getScrollHeight()) {
+        this.getEvaluation()
+      }
     },
     openEva (index) {
-      console.log(Math.abs(this.evaList[index].is_open - 1))
       this.evaList[index].is_open = Math.abs(this.evaList[index].is_open - 1)
     },
     changeType (type) {

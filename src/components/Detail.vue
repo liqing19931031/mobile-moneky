@@ -7,6 +7,24 @@
           <span :class='this.title === "shop" && "active"' @click='changeallNav("shop")'><a href="#order">商品</a></span>
           <span :class='this.title === "detail" && "active"' @click='changeallNav("detail")'><a href="#goods-detail">详情</a></span>
         </div>
+        <mu-icon-menu class="glyphicon glyphicon-menu"
+          icon=""
+          :anchorOrigin='{horizontal: "right", vertical: "top"}'
+          :targetOrigin='{horizontal: "right", vertical: "top"}'
+        >
+          <a href="/index">
+            <mu-menu-item title="首页" />
+          </a>
+          <a :href='`${BASEURL}cart_list.html`'>
+            <mu-menu-item title="购物车" />
+          </a>
+          <a :href='`${BASEURL}store_search.html`'>
+            <mu-menu-item title="搜索" />
+          </a>
+          <a :href='`${BASEURL}member/member.html`'>
+            <mu-menu-item title="我的" />
+          </a>
+        </mu-icon-menu>
       </div>
       <div class="order">
         <div class="order-left">
@@ -195,16 +213,15 @@ export default {
       }
       return isprice ? price : number.toString()
     },
-    isLogin () { // 判断是否登录
+    isin () { // 判断是否登录
       if (!this.getCookie('user_account')) {
         window.location.href = this.setUrl()
       }
     },
     toCollect () { // 收藏操作
-      Message('您已经收藏过此店铺拉~')
-      this.isLogin()
+      this.isin()
       if (this.shopDetail.is_collect === 1) {
-        this.$message('您已经收藏过此店铺拉~')
+        Message('您已经收藏过此店铺拉~')
       }
       this.$ajax('get', '', {
         ctl: 'Goods_GoodsExt',
@@ -224,9 +241,32 @@ export default {
       }
       return +number
     },
+    editPrice (price) {
+      for (let key in this.shopDetail.goods_stock) {
+        for (let newKey in this.shopDetail.goods_stock[key]) {
+          this.shopDetail.goods_stock[key][newKey].price = price
+        }
+      }
+    },
     handleChange () { // 阶梯价二次渲染
+      setTimeout(() => {
+        if (this.shopDetail.ladder.length > 0) {
+          this.shopDetail.ladder.forEach((item, index) => {
+            if (this.shopDetail.ladder[index + 1]) {
+              if (this.caclAllNumber() > item.number && this.caclAllNumber() < this.shopDetail.ladder[index + 1].number) {
+                this.editPrice(item.price)
+              }
+            } else {
+              if (this.caclAllNumber() > item.number) {
+                this.editPrice(item.price)
+              }
+            }
+          })
+        }
+      }, 100)
     },
     byShops () { // 下单 / 加入购物车
+      this.isin()
       let goodsNorms = {}
       for (let key in this.shopDetail.goods_stock) {
         for (let newKey in this.shopDetail.goods_stock[key]) {
@@ -243,7 +283,7 @@ export default {
         common_id: this.shopDetail.baseSpec.goods_id
       }).then((data) => {
         if (data.data.status === 200) {
-          this.isbuy ? window.location.href = 'http://wap.mhw001.com/tmpl/cart_list.html' : this.$message({
+          this.isbuy ? window.location.href = 'http://wap.mhw001.com/tmpl/cart_list.html' : Message({
             message: '加入购物车成功~',
             type: 'success'
           })
@@ -255,7 +295,7 @@ export default {
         ctl: 'Goods_GoodsExt',
         met: 'goodsInfo',
         typ: 'json',
-        gid: this.$route.query.id || 299
+        gid: this.$route.query.id
       }).then((data) => {
         if (data.status === 200) {
           this.shopDetail = data.data
@@ -321,10 +361,17 @@ a{
       margin-left: 3rem;
     }
   }
-  i{
+  .glyphicon-back{
     position: absolute;
     top: 1.133333rem;
     left: 1rem;
+  }
+  .glyphicon-menu{
+    float: right;
+    width: 1.333333rem;
+    height: 3.333333rem;
+    padding: 1.133333rem 0;
+    padding-right: 2rem;
   }
 }
 .order{
@@ -549,7 +596,7 @@ a{
       border-radius: .266667rem;
     }
   }
-  .mu-dialog-body{
+  .mu-dia-body{
     padding: 0;
     margin: 0;
     overflow: visible!important;

@@ -67,6 +67,27 @@ img{
 	background-color: @fontHover;
 	font-size: .6rem;
 }
+.mu-dialog-body{
+	padding: 0;
+	overflow: visible!important;
+}
+.mu-text-field.has-label{
+	min-height: 1.333333rem;
+}
+.mu-text-field-content{
+	padding: 0;
+}
+.mu-text-field{
+	margin: 0;
+	font-size: .8rem;
+	min-height: 1.333333rem;
+	& + .mu-text-field{
+		margin-top: 1.333333rem;
+	}
+	&:last-child{
+		width: 15rem;
+	}
+}
 
 // element-ui 样式覆盖
 .el-input-number{

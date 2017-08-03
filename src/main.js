@@ -10,12 +10,12 @@ import { InputNumber } from 'element-ui'
 
 Vue.config.productionTip = false
 
-// const BASEIP = 'http://www.shop.com/ApiUrl'
-const BASEIP = 'http://www.mhw001.com/'
-let $ajax = function (method, url, data) {
+const BASEIP = 'http://www.shop.com/ApiUrl'
+// const BASEIP = 'http://www.mhw001.com/'
+let $ajax = function (method, url, data, specail) {
   return ajax({
     method: method,
-    url: BASEIP + url,
+    url: specail ? BASEIP : '/' + url,
     data: data,
     async: true
   })
