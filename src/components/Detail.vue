@@ -573,7 +573,8 @@ a{
   }
 }
 .modal-body{
-  width: 100%;
+  width: 25rem;
+  left: 0;
   position: absolute;
   bottom: 0;
   height: 30rem;
@@ -605,6 +606,7 @@ a{
     position: absolute;
     bottom: 0;
     width: 100%;
+    left: 0;
     line-height: 2.666667rem;
     text-align: center;
     color: white;

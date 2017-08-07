@@ -1,10 +1,10 @@
-let createXHR = function () {
+let createXHR = function () { // 实例化XMLHttpRequest 对象
 	if (window.XMLHttpRequest) {
 		return new XMLHttpRequest()
 	} else {
 	}
 }
-let params = function (data) {
+let params = function (data) { // 序列化请求参数（只为get请求服务）
 	let arr = []
 	for (let i in data) {
 		arr.push(encodeURIComponent(i) + '=' + encodeURIComponent(data[i]))
@@ -12,17 +12,18 @@ let params = function (data) {
 	return arr.join('&')
 }
 let ajax = function (obj) {
-	return new Promise(function (resolve, reject) {
+	return new Promise(function (resolve, reject) { // 返回promise 对象实例 并接受resolve 和reject 两个参数
 		let xhr = createXHR()
 		obj.url = obj.url //  + '?rand=' + Math.random()
 		obj.data = params(obj.data)
 		if (obj.method === 'get') {
-	        obj.url += obj.url.indexOf('?') === -1 ? '?' + obj.data : '&' + obj.data
+      obj.url += obj.url.indexOf('?') === -1 ? '?' + obj.data : '&' + obj.data
 	  }
 	  if (obj.async === true) {
+			// xhr.withCredentials = true
 	  	xhr.onreadystatechange = function () {
 	  		if (xhr.readyState === 4) {
-	  			resolve(JSON.parse(xhr.responseText))
+	  			resolve(JSON.parse(xhr.responseText)) // 成功分支
 	  		}
 	  	}
 	  }

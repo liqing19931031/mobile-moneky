@@ -37,7 +37,7 @@
       </div>
       <div class="floor-content-one" v-if='index === 0'>
         <div class="one-shop inline-block" v-for='item in NAVS[index].goodsData'>
-          <router-link :to="{ path: '/detail', query: {id: item.id} }">
+          <router-link :to="{ path: '/detail', query: {id: item.gid} }">
             <img :src='item.pics' alt="">
             <div class="remake">
               <div class="name">
@@ -55,7 +55,7 @@
       </div>
       <div v-else class="floor-content-two clearfix">
         <div class="one-shop clearfix" v-for='item in NAVS[index].goodsData'>
-          <router-link :to="{ path: '/detail', query: {id: item.id} }">
+          <router-link :to="{ path: '/detail', query: {id: item.gid} }">
             <img src='/static/load.jpg' class="lazyImg in" alt="" :data-url='item.pics'>
             <div class="introduction">
               <div class="introduction-content">

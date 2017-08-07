@@ -48,7 +48,7 @@
       无评论信息~
     </div>
     <div class="loadding" v-if='this.isloadding'>
-      <img src='/static/loadding.gif' alt="">
+      <mu-circular-progress :size='90' :strokeWidth='5' color='#cb1b1d' />
     </div>
   </div>
 </template>
@@ -93,6 +93,8 @@ export default {
         this.isloadding = false
         this.evaList = type !== undefined ? data.data.items : [...this.evaList, ...data.data.items]
         this.getMore = data.data.items.length ? '已经到底了只能帮你到这里啦~' : ''
+      }).catch((error) => {
+        console.log(error)
       })
     },
     getScrollTop () {

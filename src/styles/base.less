@@ -10,6 +10,9 @@ li{
 }
 body{
 	font-family: 'Microsoft Yahei';
+	a{
+		color: @fontBase;
+	}
 }
 a,.base-font{
   color: @fontBase;
@@ -59,6 +62,11 @@ img{
 		transition: all 1s ease;
 	}
 }
+.loadding{
+	width: 100%;
+	background-color: white;
+	text-align: center;
+}
 
 // muse-ui样式覆盖
 .mu-badge-circle{
@@ -70,6 +78,9 @@ img{
 .mu-dialog-body{
 	padding: 0;
 	overflow: visible!important;
+}
+.mu-dialog{
+	width: 25rem!important;
 }
 .mu-text-field.has-label{
 	min-height: 1.333333rem;

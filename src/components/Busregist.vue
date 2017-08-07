@@ -5,9 +5,9 @@
     </div>
     <div class="busregist--card">
       <div class="card--title">
-        我要申请为美猴王{{this.beltsettled_type === 2 ? '供应商' : '第三方服务商'}}
+        我要申请为美猴王{{this.params.beltsettled_type === 2 ? '供应商' : '第三方服务商'}}
       </div>
-      <p>美猴王产业带{{this.beltsettled_type === 2 ? '供应商' : '第三方服务商'}}火热招募中！</p>
+      <p>美猴王产业带{{this.params.beltsettled_type === 2 ? '供应商' : '第三方服务商'}}火热招募中！</p>
       <p>只需两步，百万商家邀您入驻:</p>
       <p>第一步:美猴王供应商入驻报名，按照要求提供报名相关信息；</p>
       <p>第二步:申请审核，5个工作日内工作人员会联系您商谈合作事宜；</p>
@@ -18,7 +18,7 @@
         <mu-text-field hintText="手机号" v-model='params.beltsettled_phone' :errorText='errText.beltsettled_phone' @blur='blur("beltsettled_phone", {fuc: textPhone, message: "电话号码格式不正确！"})' fullWidth/>
         <mu-text-field hintText="邮箱" v-model='params.beltsettled_mail' type='email' :errorText='errText.beltsettled_mail' @blur='blur("beltsettled_mail")' fullWidth/>
         <mu-text-field hintText="公司所在地" v-model='params.beltsettled_address' :errorText='errText.beltsettled_address' @blur='blur("beltsettled_address")' fullWidth/>
-        <mu-text-field hintText="验证码" v-model='params.code' :errorText='errText.code' @blur='blur("code")' class="ver-code"/>
+        <mu-text-field hintText="验证码" v-model='params.code' :errorText='errText.code' @blur='blur("code", {fuc: textCode, message: "验证码不正确！"})' class="ver-code"/>
         <div class="code-group pull-right">
           <div class="code-group--code">
             {{this.code}}
@@ -46,6 +46,7 @@ export default {
       code: '',
       isgetCode: true,
       errText: {
+        code: '',
         beltsettled_company_name: '',
         beltsettled_linkman: '',
         beltsettled_phone: '',
@@ -72,6 +73,7 @@ export default {
   methods: {
     blur (key, fuc) {
       if (this.params[key] === '') {
+        console.log(1)
         this.errText[key] = '必填信息不能为空！'
       } else {
         if (fuc) {
@@ -88,13 +90,16 @@ export default {
     textPhone (phone) {
       return /^1[34578]{1}\d{9}$/.test(phone)
     },
+    textCode () {
+      return this.code.toLowerCase() === this.params.code.toLowerCase()
+    },
     getCode () {
       this.isgetCode && this.$ajax('get', '', {
         ctl: 'Login',
         met: 'getVerifyCode',
         typ: 'json',
         length: 4
-      }, 'specail').then((data) => {
+      }).then((data) => {
         this.isgetCode = true
         this.code = data.data.code
       })
@@ -106,7 +111,7 @@ export default {
         met: 'disposeForm',
         typ: 'json',
         ...this.params
-      }, 'specail').then((data) => {
+      }).then((data) => {
         if (data.status === 200) {
           this.$router.push({path: '/index'})
         } else {
