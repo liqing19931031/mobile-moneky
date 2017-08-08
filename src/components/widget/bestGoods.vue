@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="best-goods">
     <div class="one-line" v-for='(item, index) in this.data.data' v-if='index <= 1'>
-      <router-link :to="{path: '/detail', query: {id: item.homepage_id} }">
+      <router-link :to="{path: '/detail', query: {id: item.homepage_id}}">
         <img :src='item.homepage_pic' alt="">
         <div class="des">
           {{item.homepage_desc}}

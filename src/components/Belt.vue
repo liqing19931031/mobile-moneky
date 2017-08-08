@@ -406,16 +406,16 @@ export default {
           padding-bottom: 0;
           box-sizing: border-box;
           .introduction-content{
-            height: 1.6rem;
+            height: 1.8rem;
             overflow: hidden;
           }
           .address{
             font-size: .466667rem;
             color: #ff6600;
-            margin-top: .533333rem;
+            margin-top: .333333rem;
           }
           .price{
-            margin-top: .4rem;
+            margin-top: .2rem;
             color: #cb1b1d;
           }
         }
@@ -447,8 +447,8 @@ export default {
           img{
             display: block;
             padding: .133333rem;
-            width: 9.4rem;
-            height: 9.4rem;
+            width: 9.666667rem;
+            height: 9.666667rem;
           }
           .belt-title{
             font-size: .666667rem;

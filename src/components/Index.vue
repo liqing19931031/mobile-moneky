@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="index">
     <div class="search-group">
-      <a :href='`${this.BASEURL}store_search.html`'>
+      <a :href='`${this.BASEURL}search.html`'>
         <div class="search-input">
           <i class="glyphicon glyphicon-search"></i> 商品或店铺名
         </div>
@@ -42,7 +42,6 @@ export default {
     this.getImgList()
     this.getBestGoods()
     this.getBestBusiness()
-    console.log(this.getCookie('user_account'))
   },
   methods: {
     getImgList () {

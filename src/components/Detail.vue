@@ -266,7 +266,7 @@ export default {
       }, 100)
     },
     byShops () { // 下单 / 加入购物车
-      this.isin()
+      // this.isin()
       let goodsNorms = {}
       for (let key in this.shopDetail.goods_stock) {
         for (let newKey in this.shopDetail.goods_stock[key]) {
@@ -275,20 +275,27 @@ export default {
           }
         }
       }
-      this.$ajax('get', '', {
-        ctl: 'Buyer_CartExt',
-        met: 'addCart',
-        typ: 'json',
-        goods_norms: goodsNorms,
-        common_id: this.shopDetail.baseSpec.goods_id
-      }).then((data) => {
-        if (data.data.status === 200) {
-          this.isbuy ? window.location.href = 'http://wap.mhw001.com/tmpl/cart_list.html' : Message({
-            message: '加入购物车成功~',
-            type: 'success'
-          })
-        }
-      })
+      if (JSON.stringify(goodsNorms) === '{}') {
+        Message({
+          message: '请在购物车中添加商品~',
+          type: 'warning'
+        })
+      } else {
+        JSON.stringify(goodsNorms) !== '{}' && this.$ajax('get', '', {
+          ctl: 'Buyer_CartExt',
+          met: 'addCart',
+          typ: 'json',
+          goods_norms: JSON.stringify(goodsNorms),
+          common_id: this.shopDetail.baseSpec.goods_id
+        }).then((data) => {
+          if (data.data.status === 200) {
+            this.isbuy ? window.location.href = 'http://wap.mhw001.com/tmpl/cart_list.html' : Message({
+              message: '加入购物车成功~',
+              type: 'success'
+            })
+          }
+        })
+      }
     },
     getShopDetail () { // 初始化数据获取
       this.$ajax('get', '', {

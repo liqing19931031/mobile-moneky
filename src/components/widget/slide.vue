@@ -19,8 +19,8 @@
         left: this.groupLeft + "px"
         }'>
         <div class="slide-one" ref="slides" v-for='(item, index) in this.imgList' v-if='item'>
-          <a href="" v-if='specialDom === ""'>
-            <img :src='item.homepage_pic' alt="">
+          <a :href='item.url || `${url[item.type]}${item.id}`' v-if='specialDom === ""'>
+            <img :src='item.img' alt="">
           </a>
           <div v-else :is='specialDom' :data='item'>
           </div>
@@ -79,6 +79,13 @@ export default {
       groupLeft: -document.documentElement.getBoundingClientRect().width, // 轮播组左偏移距离
       startX: 0,
       endX: 0,
+      url: [
+        '',
+        '/detail?id=',
+        '/belt?id=',
+        `${this.BASEURL}store.html?shop_id=`,
+        ''
+      ],
       icons: [
         '',
         'clothing',

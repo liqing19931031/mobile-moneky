@@ -10,8 +10,10 @@ import { InputNumber } from 'element-ui'
 
 Vue.config.productionTip = false
 
-// const BASEIP = 'http://www.shop.com'
-const BASEIP = 'http://www.mhw001.com/'
+const BASEIP = 'http://www.shop.com'
+// const BASEIP = 'http://www.mhw001.com/'
+const LOCALADDRESS = 'http://www.ucenter.com'
+// const LOCALADDRESS = 'http://ucenter.mhw001.com'
 let $ajax = function (method, url, data, specail) {
   return ajax({
     method: method,
@@ -44,14 +46,13 @@ let getCookie = function (name) {
   }
   return cookieValue
 }
-
 Vue.use(MuseUI)
 Vue.use(InputNumber)
 Vue.prototype.$ajax = $ajax
-// Vue.prototype.BASEURL = 'http://wap.shop.com/tmpl/'
-Vue.prototype.BASEURL = 'http://wap.mhw001.com/tmpl/'
+Vue.prototype.BASEURL = 'http://wap.shop.com/tmpl/'
+// Vue.prototype.BASEURL = 'http://wap.mhw001.com/tmpl/'
 let setUrl = function () {
-  return ['http://ucenter.mhw001.com?ctl=Login&met=index&typ=e&from=wap&callback=', encodeURIComponent([BASEIP, '?ctl=Login&met=check&typ=e&redirect=', encodeURIComponent(window.location.href)].join(''))].join('')
+  return [LOCALADDRESS, '?ctl=Login&met=index&typ=e&from=wap&callback=', encodeURIComponent([BASEIP, '?ctl=Login&met=check&typ=e&redirect=', encodeURIComponent(window.location.href)].join(''))].join('')
 }
 Vue.prototype.setUrl = setUrl
 Vue.prototype.getCookie = getCookie
