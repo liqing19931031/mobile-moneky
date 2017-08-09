@@ -261,12 +261,15 @@ export default {
                 this.editPrice(item.price)
               }
             }
+            if (this.caclAllNumber() <= this.shopDetail.ladder[0].number) {
+              this.editPrice(this.shopDetail.ladder[0].price)
+            }
           })
         }
       }, 100)
     },
     byShops () { // 下单 / 加入购物车
-      // this.isin()
+      this.isin()
       let goodsNorms = {}
       for (let key in this.shopDetail.goods_stock) {
         for (let newKey in this.shopDetail.goods_stock[key]) {
