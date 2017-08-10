@@ -4,10 +4,16 @@ let createXHR = function () { // 实例化XMLHttpRequest 对象
 	} else {
 	}
 }
-let params = function (data) { // 序列化请求参数（只为get请求服务）
+let params = function (data) { // 序列化请求参数 (目前只能应用一级参数请求)
 	let arr = []
 	for (let i in data) {
-		arr.push(encodeURIComponent(i) + '=' + encodeURIComponent(data[i]))
+		if (typeof data[i] === 'object') {
+			for (let j in data[i]) {
+				arr.push(encodeURIComponent(`${i}[${j}]`) + '=' + encodeURIComponent(data[i][j]))
+			}
+		} else {
+			arr.push(encodeURIComponent(i) + '=' + encodeURIComponent(data[i]))
+		}
 	}
 	return arr.join('&')
 }
@@ -20,14 +26,14 @@ let ajax = function (obj) {
       obj.url += obj.url.indexOf('?') === -1 ? '?' + obj.data : '&' + obj.data
 	  }
 	  if (obj.async === true) {
-			// xhr.withCredentials = true
+			xhr.withCredentials = true // 带cookie请求
 	  	xhr.onreadystatechange = function () {
 	  		if (xhr.readyState === 4) {
 	  			resolve(JSON.parse(xhr.responseText)) // 成功分支
 	  		}
 	  	}
 	  }
-	  xhr.open(obj.method, obj.url, obj.async)
+		xhr.open(obj.method, obj.url, obj.async)
 	  if (obj.method === 'post') {
 	      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
 	      xhr.send(obj.data)

@@ -269,7 +269,7 @@ export default {
       }, 100)
     },
     byShops () { // 下单 / 加入购物车
-      this.isin()
+      // this.isin()
       let goodsNorms = {}
       for (let key in this.shopDetail.goods_stock) {
         for (let newKey in this.shopDetail.goods_stock[key]) {
@@ -284,11 +284,11 @@ export default {
           type: 'warning'
         })
       } else {
-        JSON.stringify(goodsNorms) !== '{}' && this.$ajax('get', '', {
+        JSON.stringify(goodsNorms) !== '{}' && this.$ajax('post', '', {
           ctl: 'Buyer_CartExt',
           met: 'addCart',
           typ: 'json',
-          goods_norms: JSON.stringify(goodsNorms),
+          goods_norms: goodsNorms,
           common_id: this.shopDetail.baseSpec.goods_id
         }).then((data) => {
           if (data.data.status === 200) {

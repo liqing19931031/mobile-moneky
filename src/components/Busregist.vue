@@ -73,7 +73,6 @@ export default {
   methods: {
     blur (key, fuc) {
       if (this.params[key] === '') {
-        console.log(1)
         this.errText[key] = '必填信息不能为空！'
       } else {
         if (fuc) {
